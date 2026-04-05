@@ -1,0 +1,385 @@
+/* Container */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    width: 380px;
+    margin: 0;
+    background: linear-gradient(135deg, #0a1628 0%, #000c23 100%);
+    color: #ffffff;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.container {
+    background: linear-gradient(135deg, #0a1628 0%, #000c23 100%);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Header */
+.templates-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(30, 178, 255, 0.2);
+}
+
+.back-button {
+    background: rgba(30, 178, 255, 0.15);
+    border: 1px solid rgba(30, 178, 255, 0.3);
+    color: #1eb2ff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.back-button:hover {
+    background: rgba(30, 178, 255, 0.25);
+    border-color: #1eb2ff;
+    transform: translateX(-2px);
+}
+
+.templates-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    flex: 1;
+    text-align: center;
+    background: linear-gradient(135deg, #1eb2ff 0%, #00d4ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.templates-subtitle {
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0 0 15px 0;
+}
+
+/* Template List */
+.template-list {
+    max-height: 350px;
+    overflow-y: auto;
+    margin-bottom: 15px;
+}
+
+.template-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.template-list::-webkit-scrollbar-track {
+    background: rgba(0, 12, 35, 0.3);
+    border-radius: 10px;
+}
+
+.template-list::-webkit-scrollbar-thumb {
+    background: rgba(30, 178, 255, 0.4);
+    border-radius: 10px;
+}
+
+.template-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(30, 178, 255, 0.6);
+}
+
+/* Template Entry */
+.template-entry {
+    background: rgba(30, 178, 255, 0.05);
+    border: 1px solid rgba(30, 178, 255, 0.2);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s ease;
+}
+
+.template-entry:hover {
+    background: rgba(30, 178, 255, 0.1);
+    border-color: rgba(30, 178, 255, 0.4);
+    transform: translateX(2px);
+}
+
+.template-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.template-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1eb2ff;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.template-name:hover {
+    color: #00d4ff;
+    text-decoration: underline;
+}
+
+.template-preview {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Template Actions */
+.template-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.template-actions button {
+    background: rgba(30, 178, 255, 0.15);
+    border: 1px solid rgba(30, 178, 255, 0.3);
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.use-btn {
+    background: rgba(76, 175, 80, 0.15) !important;
+    border-color: rgba(76, 175, 80, 0.3) !important;
+}
+
+.use-btn:hover {
+    background: rgba(76, 175, 80, 0.25) !important;
+    border-color: #4caf50 !important;
+    transform: scale(1.1);
+}
+
+.edit-btn:hover {
+    background: rgba(255, 152, 0, 0.25) !important;
+    border-color: #ff9800 !important;
+    transform: scale(1.1);
+}
+
+.delete-btn {
+    background: rgba(244, 67, 54, 0.15) !important;
+    border-color: rgba(244, 67, 54, 0.3) !important;
+}
+
+.delete-btn:hover {
+    background: rgba(244, 67, 54, 0.25) !important;
+    border-color: #f44336 !important;
+    transform: scale(1.1);
+}
+
+.btn-icon {
+    font-size: 14px;
+}
+
+/* Edit Form */
+.edit-form {
+    background: rgba(30, 178, 255, 0.05);
+    border: 1px solid rgba(30, 178, 255, 0.2);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 15px;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 15px 0;
+    color: #1eb2ff;
+}
+
+.form-group {
+    margin-bottom: 12px;
+}
+
+.form-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid rgba(30, 178, 255, 0.3);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    color: #ffffff;
+    background: rgba(0, 12, 35, 0.6);
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #1eb2ff;
+    box-shadow: 0 0 0 3px rgba(30, 178, 255, 0.1);
+}
+
+.form-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 12px;
+}
+
+.form-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 10px;
+    border: 2px solid rgba(30, 178, 255, 0.3);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    color: #ffffff;
+    background: rgba(0, 12, 35, 0.6);
+    resize: vertical;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-textarea:focus {
+    outline: none;
+    border-color: #1eb2ff;
+    box-shadow: 0 0 0 3px rgba(30, 178, 255, 0.1);
+}
+
+.form-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 12px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn-save {
+    flex: 1;
+    background: linear-gradient(135deg, #1eb2ff 0%, #00d4ff 100%);
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(30, 178, 255, 0.3);
+}
+
+.btn-save:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(30, 178, 255, 0.5);
+}
+
+.btn-cancel {
+    background: rgba(244, 67, 54, 0.15);
+    color: #f44336;
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-cancel:hover {
+    background: rgba(244, 67, 54, 0.25);
+    border-color: #f44336;
+}
+
+/* Add New Button */
+.btn-add-new {
+    width: 100%;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #1eb2ff 0%, #00d4ff 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(30, 178, 255, 0.3);
+}
+
+.btn-add-new:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(30, 178, 255, 0.5);
+}
+
+.btn-add-new .btn-icon {
+    font-size: 16px;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.empty-icon {
+    font-size: 64px;
+    margin-bottom: 15px;
+    opacity: 0.5;
+}
+
+.empty-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 10px 0;
+}
+
+.empty-hint {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Hidden class utility */
+.hidden {
+    display: none !important;
+}

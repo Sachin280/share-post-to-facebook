@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Saved Post Templates</title>
+    <link rel="stylesheet" type="text/css" href="popup.css">
+    <link rel="stylesheet" type="text/css" href="address-book.css">
+</head>
+<body>
+    <div class="container">
+        <div class="templates-header">
+            <button id="back-button" class="back-button">← Back</button>
+            <h1 class="templates-title">📝 Saved Post Templates</h1>
+        </div>
+        <p class="templates-subtitle">Save and reuse your post content templates</p>
+        
+        <div id="template-list" class="template-list"></div>
+        
+        <div id="edit-form" class="edit-form hidden">
+            <h2 class="form-title">✏️ Edit Template</h2>
+            <div class="form-group">
+                <label for="edit-name" class="form-label">Template Name</label>
+                <input type="text" id="edit-name" class="form-input" placeholder="e.g., Product Launch Post">
+            </div>
+            <div class="form-group">
+                <label for="edit-data" class="form-label">Post Content</label>
+                <textarea id="edit-data" class="form-textarea" placeholder="Your post content here..."></textarea>
+            </div>
+            <div class="form-actions">
+                <button id="save-edit" class="btn-save">💾 Save Template</button>
+                <button id="cancel-edit" class="btn-cancel">Cancel</button>
+            </div>
+        </div>
+        
+        <button id="add-new" class="btn-add-new">
+            <span class="btn-icon">➕</span> Add New Template
+        </button>
+    </div>
+    <script src="address-book.js"></script>
+</body>
+</html>

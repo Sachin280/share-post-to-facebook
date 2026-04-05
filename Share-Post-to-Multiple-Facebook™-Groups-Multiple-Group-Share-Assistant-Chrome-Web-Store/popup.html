@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ShareUnlimited</title>
+  <link rel="stylesheet" type="text/css" href="popup.css">
+  <style>
+    .hidden { display: none; }
+  </style>
+</head>
+<body class="hidden">
+  <div class="wrapper">
+    <div class="header">
+      <div class="logo-container">
+        <a href="https://mgsa.lovable.app/" target="_blank"><img src="images/rectlogo.png" alt="Multiple Group Share Assistant Logo" class="logo"></a>
+        <a href="https://solaitions.com" target="_blank"><img src="images/bysolaitions2.png" alt="by Solaitions" class="by-logo"></a>
+      </div>
+      <div class="header-icons">
+        <span id="addressBookIcon" title="Saved Post Templates" class="header-icon star-emoji">📝</span>
+        <span id="oneClickTemplatesIcon" title="1 Click Share Templates" class="header-icon star-emoji">⚡</span>
+        <span id="groupPresetsIcon" title="Group Presets Manager" class="header-icon star-emoji">📖</span>
+        <span id="favoriteStarIcon" title="Favorite Fillers" class="header-icon star-emoji" style="display: none;">⭐</span>
+        <img src="images/settings.png" id="settingsIcon" title="Settings" class="header-icon" />
+      </div>
+    </div>
+    <!-- Wrong Location Overlay -->
+    <div id="wrong-location-overlay" class="wrong-location-overlay hidden">
+      <div class="overlay-content">
+        <button id="tutorial-button" class="tutorial-button">
+          📺 WATCH TUTORIAL
+        </button>
+        <img src="images/instructions.jpg" alt="Instructions" class="instructions-image">
+      </div>
+    </div>
+
+
+    <div id="share-container" style="padding: 15px;">
+      <h2 class="section-title">Multiple Group Share Assistant</h2>
+      <p class="section-subtitle-text">Safe & Simple Group Sharing</p>
+      
+      
+      <!-- Message Section -->
+      <div class="message-composer">
+        <div class="step-header">
+          <span class="step-number">Step 1</span>
+          <div class="step-content">
+            <div class="field-header">
+              <label class="field-label">(Optional)</label>
+              <span class="info-icon" data-image-tooltip="images/texthere.jpg">ℹ️</span>
+              <button id="ai-magic-btn" class="ai-magic-button" title="Generate unique variations to avoid spam detection">
+                ✨ AI Variations
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <textarea 
+          id="post-content" 
+          class="message-textarea"
+          placeholder="Type the message you want to post in each group (optional)..."
+        ></textarea>
+        
+        <div id="variation-indicator" class="variation-indicator hidden">
+          <span class="indicator-icon">✅</span>
+          <span id="variation-count-text">3 variations ready</span>
+          <button id="edit-variations-btn" class="link-button">Edit</button>
+        </div>
+        
+        <div class="signature-section">
+          <!-- Container for both buttons side by side -->
+          <div class="signature-and-preset-container">
+            <div class="signature-header">
+              <button id="signature-toggle-btn" class="signature-toggle-btn">
+                ✍️ Add Signature
+              </button>
+              <span class="info-icon" title="Automatically appends a custom signature to the end of every post you share">ℹ️</span>
+            </div>
+            
+            <!-- Save as Preset Button -->
+            <div class="save-preset-header">
+              <button id="save-post-preset-btn" class="save-post-preset-btn">
+                💾 Save as Preset
+              </button>
+              <span class="info-icon" title="Save this post text as a template for future use">ℹ️</span>
+            </div>
+          </div>
+          <div id="signature-container" class="signature-container hidden">
+            <div class="field-header">
+              <label class="field-label">Signature</label>
+              <span class="info-icon" title="Text automatically added to the end of every post">ℹ️</span>
+            </div>
+            <textarea 
+              id="signature-text" 
+              class="signature-textarea"
+              placeholder="E.g., 'Join my community at example.com'"
+            ></textarea>
+            <div class="signature-actions">
+              <label class="signature-checkbox-label">
+                <input type="checkbox" id="signature-enabled" class="signature-checkbox">
+                <span>Enable</span>
+              </label>
+              <button id="signature-save-btn" class="signature-save-btn">💾 Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Group Selection Section -->
+      <div class="groups-section">
+        <div class="step-header">
+          <span class="step-number">Step 2</span>
+          <div class="step-content">
+            <h3 class="section-subtitle">Choose groups to share to</h3>
+          </div>
+        </div>
+        
+        <!-- Show All Groups Button - Prominent placement -->
+        <button id="show-all-groups-button" class="show-all-groups-primary" title="Click to load all groups (bypasses lazy loading)">
+          📋 Load All
+        </button>
+        
+        <div class="group-search-container">
+          <input type="text" id="group-search-input" class="group-search-input" placeholder="🔍 Search groups...">
+          <span id="search-clear-btn" class="search-clear-btn hidden">✕</span>
+        </div>
+        
+        <div class="controls-row">
+          <button id="refresh-groups-button" class="icon-button" title="Load groups from Facebook" style="display: none;">
+            🔄 Refresh
+          </button>
+        </div>
+        
+        <div class="group-stats">
+          <span id="group-count" class="group-count-badge">0 groups found</span>
+          <button id="toggle-chosen-groups" class="toggle-chosen-btn hidden">
+            Show Chosen
+          </button>
+          <label class="select-all-label">
+            <input type="checkbox" id="select-all-groups" class="styled-checkbox">
+            <span>Select All</span>
+          </label>
+        </div>
+        
+        <div id="group-list" class="group-list">
+          <div class="empty-state">
+            <div class="empty-icon">🔍</div>
+            <p class="empty-text">No groups found</p>
+            <p class="empty-hint">Open Facebook, click "Share" on a post, then click Refresh above.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Step 3: Share Settings and Button -->
+      <div class="share-settings-section">
+        <div class="step-header">
+          <span class="step-number">Step 3</span>
+          <div class="step-content">
+            <h3 class="section-subtitle">Configure and Share</h3>
+          </div>
+        </div>
+        
+        <div class="controls-row">
+          <div class="control-group">
+            <label class="control-label">Delay (sec)</label>
+            <span class="info-icon" title="Time between posts (minimum 5s, recommended 25s for account safety)">ℹ️</span>
+            <input type="number" id="share-delay" value="10" min="5" class="control-input">
+          </div>
+          
+          <div class="control-group">
+            <label class="control-label">
+              <input type="checkbox" id="randomize-delay" class="styled-checkbox">
+              Randomize
+            </label>
+            <span class="info-icon" title="Varies delay to appear more human">ℹ️</span>
+          </div>
+        </div>
+        
+        <!-- Share Button -->
+        <button id="share-button" class="share-button">
+          🚀 Share to Selected Groups
+        </button>
+      </div>
+      
+      <!-- Progress Bar -->
+      <div id="progress-container" class="progress-container hidden">
+        <div class="progress-info">
+          <span id="progress-text">Sharing...</span>
+          <span id="progress-count">0/0</span>
+        </div>
+        <div class="progress-bar-wrapper">
+          <div id="progress-bar" class="progress-bar">
+            <div class="progress-bar-shimmer"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Disclaimer -->
+      <p class="disclaimer">💡 Recommendation: Avoid posting 20+ links to your site within 24 hours</p>
+    </div>
+    <div id="main-content" class="hidden" style="display: none;">
+      <div id="autofill-notice" class="autofill-notice hidden">
+        <span class="autofill-text">Filling Automatically</span>
+        <button id="cancel-autofill" class="cancel-button">CANCEL?</button>
+      </div>
+      <div class="textarea-container">
+        <textarea id="address" placeholder="Paste any messy info here and let AI fill your form..."></textarea>
+        <input type="file" id="fileUpload" class="hidden" accept="image/*,application/pdf">
+        <button id="uploadButton" class="upload-btn" title="Upload Photo or PDF">📤</button>
+      </div>
+      <div class="button-group">
+        <button id="screenshotFill" class="secondary" title="Takes a screenshot and overlays numbers on fields for AI-powered filling."><img src="images/screenshot.png" alt="Screenshot Fill" style="height: 24px;"></button>
+        <button id="forceFill" class="secondary" title="AI looks at your page to fill the form. Use this when other methods fail."><img src="images/eyes.png" alt="Force Fill" style="height: 24px;"></button>
+      </div>
+      <div class="button-group">
+        <button id="selectedTextFill" class="secondary" title="Uses the text you select on the page (Ctrl+A to select all) to fill the form."><img src="images/selected.png" alt="Selected Text Fill" style="height: 24px;"></button>
+        <button id="amazonFbaButton" class="secondary" title="Specialized method for filling out Amazon FBA forms.">Amazon FBA</button>
+      </div>
+      <div class="button-group">
+        <button id="mouseControlFill" class="secondary" title="Uses AI to control the mouse and fill the form.">⬆️ Mouse Control</button>
+      </div>
+      <div class="button-group">
+        <button id="fillForm" class="primary" title="Fill your form with AI.">🖱️ Fill Form</button>
+      </div>
+      <div id="status" class="status hidden"></div>
+    </div>
+    <div id="settings-container" class="hidden">
+      <div id="auth-section">
+        <div id="signup-view">
+          <h2 class="welcome-title">Multiple Group Share Assistant</h2>
+          <p class="welcome-subtitle">Automate your Facebook group sharing.</p>
+          <div class="settings-group">
+            <input type="text" id="firstName" placeholder="First Name" class="modern-input">
+            <input type="email" id="email" placeholder="name@example.com" class="modern-input">
+            <button id="signupButton" class="modern-cta-button">Start Using MGSA</button>
+            <p class="no-credit-text">No credit card required.</p>
+          </div>
+        </div>
+        <div id="validation-view" class="hidden">
+          <h2>Validate Your License</h2>
+          <p>After signing up, click the button below to validate your license.</p>
+          <div class="button-group">
+            <button id="validateButton" class="primary">Validate License</button>
+            <button id="getLicenseButton" class="secondary">Get a License</button>
+          </div>
+          <div id="auth-status" class="status hidden"></div>
+        </div>
+      </div>
+      <div id="api-key-section">
+        <h2>Settings</h2>
+        <div id="license-tab-content">
+          <div id="license-status-view">
+            <h2>License Status</h2>
+            <p id="license-details"></p>
+            <div class="button-group">
+              <button id="refreshLicenseButton" class="primary">Refresh License Info</button>
+              <button id="accountInfoButton" class="secondary">More Account Info</button>
+            </div>
+            <div class="button-group">
+              <button id="fillFormsButton" class="primary">Start Sharing</button>
+            </div>
+            
+            <!-- Video Tutorial Link -->
+            <div class="settings-video-section">
+              <h3 class="section-subtitle">📺 Video Tutorial</h3>
+              <p class="section-subtitle-text">Learn how to use the extension effectively</p>
+              <button id="settings-watch-tutorial" class="tutorial-link-button">
+                📺 Watch Tutorial on YouTube
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Screenshot overlay -->
+    <div id="screenshot-overlay" class="screenshot-overlay hidden">
+      <img id="screenshot-image" src="" alt="Captured screenshot">
+      <div class="screenshot-hint">Click to copy to clipboard</div>
+    </div>
+
+    <!-- Address Book Management View -->
+    <div id="address-book-view" class="hidden"></div>
+
+    <!-- Address Book Modal -->
+    <div id="address-book-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Address Book</h2>
+            <div id="modal-address-list"></div>
+            <button id="use-address" class="primary">Use</button>
+        </div>
+    </div>
+
+    <!-- Group Presets Modal (Save) -->
+    <div id="save-preset-modal" class="modal hidden" style="z-index: 10000;">
+        <div class="modal-content preset-modal-content">
+            <span id="close-save-preset-modal" class="close-button">&times;</span>
+            
+            <!-- Question View -->
+            <div id="preset-question-view">
+              <h2 class="modal-title">📖 Save as Group Preset?</h2>
+              <p class="modal-subtitle">Would you like to save this group selection for later use?</p>
+              
+              <div class="preset-groups-preview">
+                <div class="preview-header">
+                  <span class="preview-icon">🎯</span>
+                  <span id="preset-groups-count-question">0 groups selected</span>
+                </div>
+                <div id="preset-groups-list-question" class="preset-groups-list"></div>
+              </div>
+              
+              <div class="preset-actions">
+                <button id="preset-answer-no" class="btn-secondary">No, thanks</button>
+                <button id="preset-answer-yes" class="btn-primary">✓ Yes, Save It!</button>
+              </div>
+            </div>
+            
+            <!-- Save Form View -->
+            <div id="preset-form-view" class="hidden">
+              <h2 class="modal-title">📖 Save Group Preset</h2>
+              <p class="modal-subtitle">Give your preset a name</p>
+              
+              <div class="preset-form">
+                <div class="form-section">
+                  <label for="preset-name" class="form-label">📝 Preset Name</label>
+                  <input 
+                    type="text" 
+                    id="preset-name" 
+                    class="preset-name-input"
+                    placeholder="e.g., Daily Marketing Groups, Tech Communities, etc."
+                    maxlength="50"
+                  >
+                </div>
+                
+                <div class="preset-groups-preview">
+                  <div class="preview-header">
+                    <span class="preview-icon">🎯</span>
+                    <span id="preset-groups-count">0 groups selected</span>
+                  </div>
+                  <div id="preset-groups-list" class="preset-groups-list"></div>
+                </div>
+                
+                <div class="preset-actions">
+                  <button id="cancel-save-preset" class="btn-secondary">Cancel</button>
+                  <button id="confirm-save-preset" class="btn-primary">💾 Save Preset</button>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Group Presets Manager Modal -->
+    <div id="presets-manager-modal" class="modal hidden" style="z-index: 10000;">
+        <div class="modal-content presets-manager-content">
+            <span id="close-presets-manager" class="close-button">&times;</span>
+            <h2 class="modal-title">📖 Group Presets Manager</h2>
+            <p class="modal-subtitle">Manage and apply your saved group selections</p>
+            
+            <div id="presets-list-container" class="presets-list-container">
+              <!-- Presets will be dynamically loaded here -->
+            </div>
+            
+            <div class="empty-presets-state hidden">
+              <div class="empty-icon">📚</div>
+              <p class="empty-text">No presets saved yet</p>
+              <p class="empty-hint">Select groups and click "Share to Selected Groups" to create your first preset.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- One Click Templates Create Modal -->
+    <div id="create-one-click-modal" class="modal hidden" style="z-index: 10001;">
+        <div class="modal-content one-click-modal-content">
+            <span id="close-create-one-click" class="close-button">&times;</span>
+            <h2 class="modal-title">⚡ Create 1 Click Share Template</h2>
+            <p class="modal-subtitle">Combine a Group List with a Post Template for instant sharing</p>
+            
+            <div class="one-click-form">
+              <div class="form-section">
+                <label for="one-click-template-name" class="form-label">Template Name</label>
+                <input 
+                  type="text" 
+                  id="one-click-template-name" 
+                  class="one-click-input"
+                  placeholder="e.g., Daily Marketing Blast, Weekly Updates, etc."
+                  maxlength="50"
+                >
+              </div>
+              
+              <div class="form-section">
+                <label for="one-click-group-preset" class="form-label">📖 Select Group List</label>
+                <select id="one-click-group-preset" class="one-click-select">
+                  <option value="">-- Select a Group List --</option>
+                </select>
+              </div>
+              
+              <div class="form-section">
+                <label for="one-click-post-template" class="form-label">📝 Select Post Template</label>
+                <select id="one-click-post-template" class="one-click-select">
+                  <option value="">-- Select a Post Template --</option>
+                </select>
+              </div>
+              
+              <div class="one-click-actions">
+                <button id="cancel-one-click-template" class="btn-secondary">Cancel</button>
+                <button id="save-one-click-template" class="btn-primary">⚡ Create Template</button>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- One Click Templates Manager Modal -->
+    <div id="one-click-manager-modal" class="modal hidden" style="z-index: 10001;">
+        <div class="modal-content one-click-manager-content">
+            <span id="close-one-click-manager" class="close-button">&times;</span>
+            <div class="modal-header-with-button">
+              <div>
+                <h2 class="modal-title">⚡ 1 Click Share Templates</h2>
+                <p class="modal-subtitle">Manage your quick share templates</p>
+              </div>
+              <button id="create-new-one-click" class="btn-primary create-new-btn">
+                ➕ Create New
+              </button>
+            </div>
+            
+            <div id="one-click-templates-list" class="one-click-templates-list">
+              <!-- Templates will be dynamically loaded here -->
+            </div>
+            
+            <div class="empty-one-click-state hidden">
+              <div class="empty-icon">⚡</div>
+              <p class="empty-text">No 1 Click Templates yet</p>
+              <p class="empty-hint">Create a template to combine your Group Lists with Post Templates for instant sharing.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Content Modal -->
+    <div id="ai-content-modal" class="modal hidden" style="z-index: 9999;">
+        <div class="modal-content ai-modal-content">
+            <span id="close-ai-modal" class="close-button">&times;</span>
+            <h2 class="modal-title">✨ AI Variation Generator</h2>
+            <p class="modal-subtitle">Create unique versions of your message to avoid spam filters</p>
+            
+            <div class="ai-form">
+              <div class="form-section">
+                <div class="form-header">
+                  <label for="ai-prompt" class="form-label">💬 Describe Your Message</label>
+                  <button id="ai-prompt-settings-btn" class="settings-toggle-btn">
+                    <span class="settings-icon">⚙️</span> Advanced
+                  </button>
+                </div>
+                <textarea 
+                  id="ai-prompt" 
+                  class="ai-prompt-input"
+                  placeholder="Example: A friendly invitation to join my new Facebook group about digital marketing tips"
+                ></textarea>
+                
+                <div id="ai-system-prompt-container" class="advanced-settings hidden">
+                  <div class="advanced-header">
+                    <span class="advanced-icon">🔧</span>
+                    <span class="advanced-title">Advanced Instructions</span>
+                  </div>
+                  <label for="ai-system-prompt" class="advanced-label">Base Instructions (System Prompt):</label>
+                  <textarea id="ai-system-prompt" class="system-prompt-input"></textarea>
+                  <div class="advanced-buttons">
+                    <button id="ai-save-system-prompt" class="btn-small primary">💾 Save as Default</button>
+                    <button id="ai-reset-system-prompt" class="btn-small secondary">🔄 Reset</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-section">
+                <label for="ai-variation-count" class="form-label">🔢 Number of Variations</label>
+                <div class="variation-count-control">
+                  <input type="number" id="ai-variation-count" value="3" min="1" max="20" class="variation-count-input">
+                  <span class="variation-help">More variations = better spam protection</span>
+                </div>
+              </div>
+              
+              <button id="ai-generate-btn" class="generate-button">
+                <span class="button-icon">✨</span> Generate Variations
+              </button>
+            </div>
+
+            <div id="ai-results-container" class="ai-results-container">
+              <!-- Results will appear here -->
+            </div>
+            
+            <div id="ai-status" class="status hidden"></div>
+            
+            <button id="ai-apply-btn" class="apply-button hidden">
+              <span class="button-icon">✅</span> Use Selected Variations
+            </button>
+        </div>
+    </div>
+
+    <script src="expired_overlay.js"></script>
+    <script src="ai_content.js"></script>
+    <script src="one_click_templates.js"></script>
+    <script src="popup.js"></script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<div id="favorites-modal-container">
+  <div id="favorites-modal-content">
+    <h2>Choose your default form fillers.</h2>
+    <p>Define a URL pattern and select the buttons to show on matching pages.</p>
+    <input type="text" id="favorites-url-input" placeholder="e.g., google.com/search">
+    <div id="favorites-buttons-container"></div>
+    <div class="autofill-container">
+      <button id="autofill-button" class="autofill-toggle">
+        <span class="autofill-icon">✗</span>
+        <span class="autofill-text">Auto-fill on extension click</span>
+      </button>
+    </div>
+    <button id="extra-prompt-toggle-button" class="secondary">Extra Prompt (Optional)</button>
+    <div id="extra-prompt-group" class="hidden">
+      <div class="extra-prompt-container">
+        <label for="extra-prompt-input">Add additional prompt for this rule (Optional):</label>
+        <textarea id="extra-prompt-input" placeholder="(Optional) Add additional prompt to guide your AI to follow this rule and fill this form exactly how you need it to."></textarea>
+      </div>
+    </div>
+    <div id="favorites-status" class="status hidden"></div>
+    <div class="button-group">
+      <button id="favorites-save-button">Save</button>
+      <button id="favorites-close-button" class="fill-forms-button">Fill Forms</button>
+    </div>
+    <div class="button-group" style="margin-top: 10px;">
+      <button id="show-all-rules-button" class="secondary">My Saved Rules</button>
+    </div>
+  </div>
+</div>
+<link rel="stylesheet" type="text/css" href="favorites-modal.css">

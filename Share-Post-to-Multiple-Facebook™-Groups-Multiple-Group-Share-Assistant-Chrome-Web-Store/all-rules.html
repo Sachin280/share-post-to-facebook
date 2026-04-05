@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="popup.css">
+  <style>
+    #rules-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    #rules-table th, #rules-table td {
+      border: 1px solid #1eb2ff;
+      padding: 8px;
+      text-align: left;
+    }
+    #rules-table th {
+      background-color: #001f4a;
+    }
+    .url-cell {
+      max-width: 150px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .edit-rule-button {
+      cursor: pointer;
+      font-size: 18px;
+      margin-right: 10px;
+    }
+    .delete-rule-button {
+      cursor: pointer;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <h2>All Saved Rules</h2>
+    <table id="rules-table">
+      <thead>
+        <tr>
+          <th>URL Pattern</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="rules-table-body">
+      </tbody>
+    </table>
+    <div class="button-group" style="margin-top: 15px;">
+      <button id="back-to-favorites-button" class="secondary">Back</button>
+    </div>
+  </div>
+</body>
+</html>
